@@ -5,8 +5,7 @@ logs/
 
 # Sensitive DBT files
 profiles.yml
-user.yml
-dbt_cloud.yml
+.user.yml
 
 # Python virtual environment
 .venv/
