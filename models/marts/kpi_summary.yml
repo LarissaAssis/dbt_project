@@ -1,0 +1,23 @@
+models:
+  - name: kpi_summary
+    columns:
+      - name: group_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: activation_rate
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: monetization_rate
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: avg_revenue_per_user
+        description: ""
+        meta:
+          dimension:
+            type: number

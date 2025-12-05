@@ -1,0 +1,23 @@
+models:
+  - name: stg_experiment
+    columns:
+      - name: user_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: signup_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: country
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: experiment_group
+        description: ""
+        meta:
+          dimension:
+            type: string
