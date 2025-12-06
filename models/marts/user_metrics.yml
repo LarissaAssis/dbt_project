@@ -1,0 +1,68 @@
+models:
+  - name: user_metrics
+    columns:
+      - name: user_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: signup_date
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: country
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: experiment_group
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: is_activated
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: activation_date
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: total_revenue_gross
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: bookings_count
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: revenue_after_credit
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: credit_consumed
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: credit_remaining
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: total_weeks_active
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: is_retained_weekly
+        description: ""
+        meta:
+          dimension:
+            type: number
