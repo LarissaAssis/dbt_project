@@ -1,0 +1,32 @@
+models:
+  - name: stg_statement_items
+    columns:
+      - name: user_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+          metrics:
+            total_users:
+              type: count
+      - name: created_at
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: id
+        description: ""
+        meta:
+          dimension:
+            type: number
+          metrics:
+            total_purchases:
+              type: count
+      - name: amount_usd
+        description: ""
+        meta:
+          dimension:
+            type: number
+          metrics:
+            total_amount_usd:
+              type: sum

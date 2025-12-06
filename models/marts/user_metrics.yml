@@ -6,6 +6,9 @@ models:
         meta:
           dimension:
             type: number
+          metrics:
+            total_users:
+              type: count
       - name: signup_date
         description: ""
         meta:
