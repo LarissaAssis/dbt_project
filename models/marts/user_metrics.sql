@@ -25,7 +25,10 @@ with enabled as (
 /* ---------- 2) Statements that occurred DURING enabled periods ---------- */
 statements_in_enabled as (
     select
-        s.*,
+        s.user_id,
+        s.created_at,
+        s.id as statement_id,
+        s.amount_usd::numeric as amount_usd,
         elp.period_start,
         elp.period_end
     from {{ ref('stg_statement_items') }} s
@@ -47,19 +50,25 @@ statements_in_enabled as (
 
 bookings_with_recognition as (
     select
-        s.user_id,
-        s.created_at,
-        s.id,
-        s.amount_usd,
-        -- Cumulative sum including current booking
-        sum(s.amount_usd) over (partition by s.user_id order by s.created_at, s.id
-                                rows between unbounded preceding and current row) as cum_after
-    from statements_in_enabled s
+        sie.user_id,
+        sie.created_at,
+        sie.statement_id,
+        sie.amount_usd,
+        sum(sie.amount_usd) over (
+            partition by sie.user_id
+            order by sie.created_at, sie.statement_id
+            rows between unbounded preceding and current row
+        ) as cum_after
+    from statements_in_enabled sie
 ),
 
 bookings_recognized as (
     select
-        b.*,
+        b.user_id,
+        b.created_at,
+        b.statement_id,
+        b.amount_usd,
+        b.cum_after,
         -- cum_before = cum_after - amount_usd
         (b.cum_after - b.amount_usd) as cum_before,
         -- Determining credit amount per user (30 for group A, 0 for group B)
@@ -74,13 +83,13 @@ bookings_recognized_final as (
     select
         br.user_id,
         br.created_at,
-        br.id,
+        br.statement_id,
         br.amount_usd,
         br.cum_before,
         br.cum_after,
         br.user_credit,
         ( greatest(0.0, br.cum_after - br.user_credit)
-          - greatest(0.0, br.cum_before - br.user_credit)
+            - greatest(0.0, br.cum_before - br.user_credit)
         )::numeric as recognized_amount
     from bookings_recognized br
 ),
@@ -120,9 +129,8 @@ user_weeks_active as (
         date_trunc('week', elp.period_end)::date,
         interval '1 week'
       ) as gs(week_start)
-    where
-      -- Keeping only weeks where the listing was still active at the end of the week
-      elp.period_end >= (gs.week_start::timestamp + interval '6 days')
+    -- Keeping only weeks where the listing was still active at the end of the week
+    where elp.period_end >= (gs.week_start::timestamp + interval '6 days')
 ),
 
 weekly_retention as (
