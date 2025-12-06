@@ -142,7 +142,7 @@ weekly_retention as (
     group by user_id
 )
 
--- FINAL SELECT: one row per user in stg_experiment
+/* ---------- 5) FINAL SELECT: one row per user in stg_experiment ---------- */
 select
     exp.user_id,
     exp.signup_date,
