@@ -60,11 +60,17 @@ models:
         meta:
           dimension:
             type: number
+          metrics:
+            total_credit_consumed:
+              type: sum
       - name: credit_remaining
         description: ""
         meta:
           dimension:
             type: number
+          metrics:
+            total_credit_remaining:
+              type: sum
       - name: total_weeks_active
         description: ""
         meta:
