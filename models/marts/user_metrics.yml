@@ -39,11 +39,17 @@ models:
         meta:
           dimension:
             type: number
+          metrics:
+            total_revenue_gross:
+              type: sum
       - name: bookings_count
         description: ""
         meta:
           dimension:
             type: number
+          metrics:
+            total_bookings_count:
+              type: sum
       - name: revenue_after_credit
         description: ""
         meta:
