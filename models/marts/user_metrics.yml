@@ -40,7 +40,7 @@ models:
           dimension:
             type: number
           metrics:
-            total_revenue_gross:
+            sum_total_revenue_gross:
               type: sum
       - name: bookings_count
         description: ""
@@ -48,7 +48,7 @@ models:
           dimension:
             type: number
           metrics:
-            total_bookings_count:
+            sum_bookings_count:
               type: sum
       - name: revenue_after_credit
         description: ""
@@ -61,7 +61,7 @@ models:
           dimension:
             type: number
           metrics:
-            total_credit_consumed:
+            sum_credit_consumed:
               type: sum
       - name: credit_remaining
         description: ""
@@ -69,7 +69,7 @@ models:
           dimension:
             type: number
           metrics:
-            total_credit_remaining:
+            sum_credit_remaining:
               type: sum
       - name: total_weeks_active
         description: ""
